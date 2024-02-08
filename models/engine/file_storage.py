@@ -28,7 +28,7 @@ class FileStorage:
         serializes __objects to the JSON file (path: __file_path)
         """
         with open(FileStorage.__file_path, "w", encoding="utf-8") as fd:
-            fd.write(json.dumps(FileStorage.__objects))
+            fd.write(json.dumps(FileStorage.__objects, indent=4))
 
     def reload(self):
         """
