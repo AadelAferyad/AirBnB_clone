@@ -6,13 +6,20 @@ import cmd
 from models.base_model import BaseModel
 from models.user import User
 from models import storage
-
+from models.place import Place
+from models.state import State
+from models.city import City
+from models.amenity import Amenity
+from models.review import Review
+import re
+import json
 
 class HBNBCommand(cmd.Cmd):
     """
     class for command interpreter
     """
-    classes = {"BaseModel": "BaseModel", "User":"User"}
+    classes = {"BaseModel": "BaseModel", "User":"User", "Place":"Place", "State":"State", "City": "City", "Amenity": "Amenity", "Review": "Review"}
+
     def __init__(self):
         """ the constractor """
         super().__init__()
@@ -41,6 +48,31 @@ Quit command to exit the program
 emptyline command to skip (if empty line passed as a command do nothing)
         """
         pass
+
+    def default(self, line):
+        """ """
+        # adv_cmmd = {".all()"}
+        args = line.split(".")
+        
+        if not line:
+            return
+        elif ".all()" in line and len(line) > 6:
+            self.do_all(args[0])
+        elif ".count()" in line and len(line) > 8:
+            if not args[0] in HBNBCommand.classes:
+                self.print_werror(2)
+            else:
+                count = 0
+                dic = storage.all()
+                for key, value in dic.items():
+                    if dic[key]["__class__"] == args[0]:
+                        count += 1
+                print(count)
+        elif ".show()" in line and len(line) > 7:
+            pass
+        else:
+            super().default(line)
+
 
     def do_create(self, arg):
         """
@@ -142,6 +174,28 @@ all command prints all string representation of all instances
         """
 update command updates an instance and save it to json file
         """
+        args = arg.split()
+        if not arg:
+            self.print_werror(1)
+        elif not args[0] in HBNBCommand.classes:
+            self.print_werror(2)
+        elif len(args) < 2:
+            self.print_werror(3)
+        else:
+            dic = storage.all()
+            key = args[0] + "." + args[1]
+            if not key in dic:
+                self.print_werror(4)
+            elif len(args) < 3:
+                print("** attribute name missing **")
+            elif len(args) < 4:
+                print("** value missing **")
+            else:
+                value = json.loads(args[3])
+                dic[key][args[2]] = value
+                instance = eval(HBNBCommand.classes[args[0]]+"(**dic[key])")
+                storage.save()
+
 
 
 if __name__ == '__main__':
