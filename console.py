@@ -53,7 +53,8 @@ emptyline command to skip (if empty line passed as a command do nothing)
         """ """
         # adv_cmmd = {".all()"}
         args = line.split(".")
-        
+        # pattern = r"[\"].+[^\)]"
+        pattern = r"(?<=\"|\").+([^\")])"
         if not line:
             return
         elif ".all()" in line and len(line) > 6:
@@ -68,8 +69,35 @@ emptyline command to skip (if empty line passed as a command do nothing)
                     if dic[key]["__class__"] == args[0]:
                         count += 1
                 print(count)
-        elif ".show()" in line and len(line) > 7:
-            pass
+        elif (((".show(" in line) and (")" in line)) or ((".destroy(" in line) and  (")" in line))) and len(line) > 8:
+            regex_id = ""
+            full_cmd = ""
+            matchs = re.search(pattern, args[1])
+            if matchs:
+                regex_id = matchs.group()
+            full_cmd += args[0] + " " + regex_id
+            if ("show" in line):
+                self.do_show(full_cmd)
+            else:
+                self.do_destroy(full_cmd)
+        elif ((".update(" in line) and (")" in line)) and len(line) > 8:
+            full_pattern = r"(?<=\(|\").+([^\)])"
+            full_cmd = ""
+            regex_full = ""
+            matchs = re.search(full_pattern, args[1])
+            if matchs:
+                regex_full = matchs.group()
+            regex_id, regex_att, regex_va = regex_full.split(",")
+            matchs = re.search(pattern, regex_id)
+            if matchs:
+                regex_id = matchs.group()
+            if "\"" in regex_att:
+                matchs = re.search(pattern, regex_att)
+                if matchs:
+                    regex_att = matchs.group()
+            full_cmd += args[0] + " " + regex_id + " " + regex_att + " " + regex_va
+            print(full_cmd)
+            self.do_update(full_cmd)
         else:
             super().default(line)
 
