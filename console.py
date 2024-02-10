@@ -19,14 +19,10 @@ class HBNBCommand(cmd.Cmd):
     """
     class for command interpreter
     """
+    prompt = "(hbnb) "
     classes = {"BaseModel": "BaseModel", "User": "User",
                "Place": "Place", "State": "State", "City": "City",
                "Amenity": "Amenity", "Review": "Review"}
-
-    def __init__(self):
-        """ the constractor """
-        super().__init__()
-        self.prompt = "(hbnb) "
 
     def do_help(self, arg):
         """
@@ -155,7 +151,7 @@ show command prints the string representation of an instance
         all_instances = ""
         if i != 0:
             all_instances = all_instances + "\", \""
-        instance = eval(HBNBCommand.classes[arg] + "(**dic[key])")
+        instance = eval(HBNBCommand.classes[arg] + "(**dic)")
         all_instances = all_instances + str(instance)
         return all_instances
 
@@ -190,12 +186,13 @@ all command prints all string representation of all instances
         fromat = "[\""
         for key, value in dic.items():
             clss = key.split(".")
+            obj = value.to_dict()
             if arg:
                 if clss[0] == arg:
-                    fromat += self.all_formater(arg, i, key, **dic)
+                    fromat += self.all_formater(arg, i, key, **obj)
                     i += 1
             else:
-                fromat += self.all_formater(clss[0], i, key, **dic)
+                fromat += self.all_formater(clss[0], i, key, **obj)
                 i += 1
         fromat = fromat + "\"]"
         print(fromat)
