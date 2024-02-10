@@ -63,7 +63,8 @@ emptyline command to skip (if empty line passed as a command do nothing)
                 count = 0
                 dic = storage.all()
                 for key, value in dic.items():
-                    if dic[key]["__class__"] == args[0]:
+                    obj = dic[key].to_dict()
+                    if obj["__class__"] == args[0]:
                         count += 1
                 print(count)
         elif (((".show(" in line) and (")" in line)) or
