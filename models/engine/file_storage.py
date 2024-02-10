@@ -2,6 +2,13 @@
 """ this file is for file storage """
 import os
 import json
+from models.amenity import Amenity
+from models.base_model import BaseModel
+from models.city import City
+from models.place import Place
+from models.review import Review
+from models.state import State
+from models.user import User
 
 
 class FileStorage:
@@ -21,14 +28,17 @@ class FileStorage:
         sets in __objects the obj with key <obj class name>.id
         """
         key = obj.__class__.__name__ + "." + obj.id
-        FileStorage.__objects[key] = obj.to_dict()
+        FileStorage.__objects[key] = obj
 
     def save(self):
         """
         serializes __objects to the JSON file (path: __file_path)
         """
+        json_data = {}
+        for key, value in FileStorage.__objects.items():
+            json_data[key] = value.to_dict()
         with open(FileStorage.__file_path, "w", encoding="utf-8") as fd:
-            fd.write(json.dumps(FileStorage.__objects, indent=4))
+            fd.write(json.dumps(json_data, indent=4))
 
     def reload(self):
         """
@@ -36,4 +46,10 @@ class FileStorage:
         """
         if os.path.exists(FileStorage.__file_path):
             with open(FileStorage.__file_path, "r", encoding="utf-8") as fd:
-                FileStorage.__objects = json.loads(fd.read())
+                json_data = json.loads(fd.read())
+                for key, value in json_data.items():
+                    if '.' in key:
+                        class_name, obj_id = key.split('.')
+                        class_obj = globals()[class_name]
+                        instance = class_obj(**value)
+                        self.new(instance)
