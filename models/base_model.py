@@ -14,6 +14,7 @@ class BaseModel:
     the parent class that define all common
     attributes and methods for other classes
     """
+
     def __init__(self, *args, **kwargs):
         """
         Initialize an instance of the class.
@@ -29,6 +30,7 @@ class BaseModel:
                 - Set 'created_at' and 'updated_at' to the current datetime.
                 - Add the instance to the storage.
         """
+
         if len(kwargs) != 0:
             for key, value in kwargs.items():
                 if key == "__class__":

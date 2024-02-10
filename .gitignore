@@ -2,4 +2,5 @@
 */pycache/
 *.pycpycache/
 *.pyc
+/my_own/
 file.json

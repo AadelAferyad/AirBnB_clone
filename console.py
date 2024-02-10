@@ -21,6 +21,7 @@ class HBNBCommand(cmd.Cmd):
     """
     class for command interpreter
     """
+
     prompt = "(hbnb) "
     classes = {"BaseModel": "BaseModel", "User": "User",
                "Place": "Place", "State": "State", "City": "City",
