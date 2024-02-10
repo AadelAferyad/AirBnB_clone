@@ -134,7 +134,8 @@ show command prints the string representation of an instance
             if key not in dic:
                 self.print_werror(4)
             else:
-                instance = eval(HBNBCommand.classes[args[0]] + "(**dic[key])")
+                obj = dic[key].to_dict()
+                instance = eval(HBNBCommand.classes[args[0]] + "(**obj)")
                 print(instance)
 
     @staticmethod
@@ -220,9 +221,10 @@ update command updates an instance and save it to json file
             elif len(args) < 4:
                 print("** value missing **")
             else:
-                value = json.loads(args[3])
-                dic[key][args[2]] = value
-                instance = eval(HBNBCommand.classes[args[0]]+"(**dic[key])")
+                obj = dic[key].to_dict()
+                obj[args[2]] = json.loads(args[3])
+                instance = eval(HBNBCommand.classes[args[0]]+"(**obj)")
+                storage.new(instance)
                 storage.save()
 
 
