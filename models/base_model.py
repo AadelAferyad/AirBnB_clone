@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """ this file containe the base class """
-import models
+from . import storage
 from datetime import datetime
 import uuid
 
