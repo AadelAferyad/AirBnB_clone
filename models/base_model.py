@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """ this file containe the base class """
-from . import storage
+import models
 from datetime import datetime
 import uuid
 
@@ -11,7 +11,20 @@ class BaseModel:
     attributes and methods for other classes
     """
     def __init__(self, *args, **kwargs):
-        """ the constractor """
+        """
+        Initialize an instance of the class.
+
+        Parameters:
+        - *args: Not used.
+        - **kwargs: Keyword arguments for initializing instance attributes.
+            - If provided:
+                - Set attributes using kwargs, excluding '__class__'.
+                - Convert 'created_at' and 'updated_at' to datetime objects.
+            - If not provided:
+                - Generate a new UUID for 'id'.
+                - Set 'created_at' and 'updated_at' to the current datetime.
+                - Add the instance to the storage.
+        """
         if len(kwargs) != 0:
             for key, value in kwargs.items():
                 if key == "__class__":
@@ -43,8 +56,9 @@ class BaseModel:
 
     def to_dict(self):
         """
-        returns a dictionary containing all keys/values
-        of __dict__ of the instance
+        method make a dictionary
+        return :
+            dictionary containing all keys/values of __dict__ of the instance
         """
         dictionary = dict(self.__dict__)
         dictionary['__class__'] = self.__class__.__name__
