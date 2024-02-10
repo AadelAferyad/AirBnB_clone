@@ -2,8 +2,6 @@
 """
 this file is for the console (commande line intrepreter)
 """
-
-
 import cmd
 from models.base_model import BaseModel
 from models.user import User
@@ -13,18 +11,17 @@ from models.state import State
 from models.city import City
 from models.amenity import Amenity
 from models.review import Review
-import re
 import json
-
 
 class HBNBCommand(cmd.Cmd):
     """
     class for command interpreter
     """
-    prompt = "(hbnb) "
-    classes = {"BaseModel": "BaseModel", "User": "User",
-               "Place": "Place", "State": "State", "City": "City",
-               "Amenity": "Amenity", "Review": "Review"}
+    classes = {"BaseModel": "BaseModel", "User":"User", "Place":"Place", "State":"State", "City": "City", "Amenity": "Amenity", "Review": "Review"}
+    def __init__(self):
+        """ the constractor """
+        super().__init__()
+        self.prompt = "(hbnb) "
 
     def do_help(self, arg):
         """
@@ -53,55 +50,19 @@ emptyline command to skip (if empty line passed as a command do nothing)
     def default(self, line):
         """ """
         args = line.split(".")
-        pattern = r"(?<=\"|\").+([^\")])"
         if not line:
-            return
+            super().__init__()
         elif ".all()" in line and len(line) > 6:
-            self.do_all(args[0])
+            if not args[0] in HBNBCommand.classes:
+                self.print_werror(2)
+            else:
+                self.do_all(args[0])
         elif ".count()" in line and len(line) > 8:
             if not args[0] in HBNBCommand.classes:
                 self.print_werror(2)
             else:
-                count = 0
-                dic = storage.all()
-                for key, value in dic.items():
-                    obj = dic[key].to_dict()
-                    if obj["__class__"] == args[0]:
-                        count += 1
-                print(count)
-        elif (((".show(" in line) and (")" in line)) or
-              ((".destroy(" in line) and (")" in line))) and len(line) > 8:
-            regex_id = ""
-            full_cmd = ""
-            matchs = re.search(pattern, args[1])
-            if matchs:
-                regex_id = matchs.group()
-            full_cmd += args[0] + " " + regex_id
-            if ("show" in line):
-                self.do_show(full_cmd)
-            else:
-                self.do_destroy(full_cmd)
-        elif ((".update(" in line) and (")" in line)) and len(line) > 8:
-            full_pattern = r"(?<=\(|\").+([^\)])"
-            full_cmd = ""
-            regex_full = ""
-            matchs = re.search(full_pattern, args[1])
-            if matchs:
-                regex_full = matchs.group()
-            regex_id, regex_att, regex_va = regex_full.split(",")
-            matchs = re.search(pattern, regex_id)
-            if matchs:
-                regex_id = matchs.group()
-            if "\"" in regex_att:
-                matchs = re.search(pattern, regex_att)
-                if matchs:
-                    regex_att = matchs.group()
-            full_cmd += args[0] + " " + regex_id + " " + \
-                regex_att + " " + regex_va
-            print(full_cmd)
-            self.do_update(full_cmd)
-        else:
-            super().default(line)
+                pass
+
 
     def do_create(self, arg):
         """
@@ -109,10 +70,11 @@ create command to create new object and save it to Json file
         """
         if not arg:
             self.print_werror(1)
-        elif arg not in HBNBCommand.classes:
+        elif not arg in HBNBCommand.classes:
             self.print_werror(2)
         elif arg in HBNBCommand.classes:
-            instance = eval(HBNBCommand.classes[arg] + "()")
+            # obj = getattr(class_module, arg)
+            instance = eval(HBNBCommand.classes[arg]+"()")
             instance.save()
             print(instance.id)
 
@@ -123,18 +85,17 @@ show command prints the string representation of an instance
         args = arg.split()
         if not arg:
             self.print_werror(1)
-        elif args[0] not in HBNBCommand.classes:
+        elif not args[0] in HBNBCommand.classes:
             self.print_werror(2)
         elif (len(args) < 2):
             self.print_werror(3)
         else:
             dic = storage.all()
             key = args[0] + "." + args[1]
-            if key not in dic:
+            if not key in dic:
                 self.print_werror(4)
             else:
-                obj = dic[key].to_dict()
-                instance = eval(HBNBCommand.classes[args[0]] + "(**obj)")
+                instance = eval(HBNBCommand.classes[args[0]]+"(**dic[key])")
                 print(instance)
 
     @staticmethod
@@ -149,15 +110,6 @@ show command prints the string representation of an instance
         elif case == 4:
             print("** no instance found **")
 
-    @staticmethod
-    def all_formater(arg, i, key, **dic):
-        all_instances = ""
-        if i != 0:
-            all_instances = all_instances + "\", \""
-        instance = eval(HBNBCommand.classes[arg] + "(**dic)")
-        all_instances = all_instances + str(instance)
-        return all_instances
-
     def do_destroy(self, arg):
         """
 destroy command Deletes an instance
@@ -165,13 +117,15 @@ destroy command Deletes an instance
         args = arg.split()
         if not arg:
             self.print_werror(1)
-        elif args[0] not in HBNBCommand.classes:
+        elif not args[0] in HBNBCommand.classes:
             self.print_werror(2)
         elif (len(args) < 2):
             self.print_werror(3)
         else:
             dic = storage.all()
             key = args[0] + "." + args[1]
+            # if not key in dic:
+                # self.print_werror(4)
             if dic.pop(key, None) is None:
                 self.print_werror(4)
             else:
@@ -182,23 +136,29 @@ destroy command Deletes an instance
 all command prints all string representation of all instances
         """
         i = 0
-        if arg and arg not in HBNBCommand.classes:
-            self.print_werror(2)
-            return 0
+        if arg:
+            if not arg in HBNBCommand.classes:
+                self.print_werror(2)
+                return 0
+        all_instances = "[\""
         dic = storage.all()
-        fromat = "[\""
         for key, value in dic.items():
-            clss = key.split(".")
-            obj = value.to_dict()
+            key_class = key.split(".")
             if arg:
-                if clss[0] == arg:
-                    fromat += self.all_formater(arg, i, key, **obj)
+                if key_class[0] == arg:
+                    if i != 0:
+                        all_instances = all_instances + "\", \""
+                    instance = eval(HBNBCommand.classes[arg] + "(**dic[key])")
+                    all_instances = all_instances + str(instance)
                     i += 1
             else:
-                fromat += self.all_formater(clss[0], i, key, **obj)
+                if i != 0:
+                        all_instances = all_instances + "\", \""
+                instance = eval(HBNBCommand.classes[key_class[0]] + "(**dic[key])")
+                all_instances = all_instances + str(instance)
                 i += 1
-        fromat = fromat + "\"]"
-        print(fromat)
+        all_instances = all_instances + "\"]"
+        print(all_instances)
 
     def do_update(self, arg):
         """
@@ -207,25 +167,25 @@ update command updates an instance and save it to json file
         args = arg.split()
         if not arg:
             self.print_werror(1)
-        elif args[0] not in HBNBCommand.classes:
+        elif not args[0] in HBNBCommand.classes:
             self.print_werror(2)
         elif len(args) < 2:
             self.print_werror(3)
         else:
             dic = storage.all()
             key = args[0] + "." + args[1]
-            if key not in dic:
+            if not key in dic:
                 self.print_werror(4)
             elif len(args) < 3:
                 print("** attribute name missing **")
             elif len(args) < 4:
                 print("** value missing **")
             else:
-                obj = dic[key].to_dict()
-                obj[args[2]] = json.loads(args[3])
-                instance = eval(HBNBCommand.classes[args[0]]+"(**obj)")
-                storage.new(instance)
+                value = json.loads(args[3])
+                dic[key][args[2]] = value
+                instance = eval(HBNBCommand.classes[args[0]]+"(**dic[key])")
                 storage.save()
+
 
 
 if __name__ == '__main__':

@@ -1,0 +1,5 @@
+/pycache/
+*/pycache/
+*.pycpycache/
+*.pyc
+file.json
