@@ -2,6 +2,7 @@
 """ this file is for test casess of BaseModel class"""
 
 import unittest
+import os
 from models.base_model import BaseModel
 from models.user import User
 from models import storage
@@ -89,6 +90,21 @@ class TestBaseModel(unittest.TestCase):
         instance_2 = BaseModel(**dic)
         self.assertNotEqual(instance_1, instance_2)
         self.assertEqual(instance_1.id, instance_2.id)
+
+    def test_storage(self):
+        """
+        test storage
+        """
+        instance_1 = BaseModel()
+        instance_1.name = "houda"
+        storage.new(instance_1)
+        dic = storage.all()
+        self.assertIn("BaseModel." + instance_1.id, dic)
+        os.remove("file.json")
+        storage.save()
+        with open("file.json", "r", encoding="utf-8") as fd:
+            data = fd.read()
+            self.assertIn("BaseModel." + instance_1.id, data)
 
 
 if __name__ == "__main__":
