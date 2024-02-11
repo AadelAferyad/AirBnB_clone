@@ -29,19 +29,19 @@ class HBNBCommand(cmd.Cmd):
 
     def do_help(self, arg):
         """
-help command to get informations about commands (help + command)
+        help command to get informations about commands (help + command)
         """
         super().do_help(arg)
 
     def do_EOF(self, line):
         """
-EOF command to exit the program or (CRTL + D)
+        EOF command to exit the program or (CRTL + D)
         """
         return True
 
     def do_quit(self, line):
         """
-Quit command to exit the program
+        Quit command to exit the program
         """
         return True
 
@@ -52,7 +52,7 @@ emptyline command to skip (if empty line passed as a command do nothing)
         pass
 
     def default(self, line):
-        """ """
+        """ this is defualt """
         args = line.split(".")
         pattern = r"(?<=\"|\").+([^\")])"
         if not line:
@@ -119,7 +119,7 @@ create command to create new object and save it to Json file
 
     def do_show(self, arg):
         """
-show command prints the string representation of an instance
+        show command prints the string representation of an instance
         """
         args = arg.split()
         if not arg:
