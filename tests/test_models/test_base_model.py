@@ -21,7 +21,7 @@ class TestBaseModel(unittest.TestCase):
 
     def test_attribute(self):
         """
-        test is the basic attributes are initilazed
+        test the basic attributes are initilazed
         """
         instance_1 = BaseModel()
         v = getattr(instance_1, "id", 0)
@@ -78,6 +78,17 @@ class TestBaseModel(unittest.TestCase):
         self.assertEqual(type(dic["created_at"]), str)
         self.assertEqual(dic["name"], "Aadel")
         self.assertEqual(type(dic["created_at"]), str)
+
+    def test_kwargs(self):
+        """
+        test passing kwargs to BaseModel()
+        """
+        instance_1 = BaseModel()
+        instance_1.name = "houda"
+        dic = instance_1.to_dict()
+        instance_2 = BaseModel(**dic)
+        self.assertNotEqual(instance_1, instance_2)
+        self.assertEqual(instance_1.id, instance_2.id)
 
 
 if __name__ == "__main__":
