@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 """ this file is for unittesting """
 
-
 from models.review import Review
 import unittest
 import datetime

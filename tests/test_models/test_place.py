@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 """ this file is for unittesting """
 
-
 import unittest
 from models.place import Place
 from models.amenity import Amenity

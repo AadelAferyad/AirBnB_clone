@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 """ this file is for unittesting """
 
-
 from models.city import City
 import unittest
 from models.state import State
