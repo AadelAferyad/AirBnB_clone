@@ -4,6 +4,7 @@
 
 from models.amenity import Amenity
 import unittest
+import datetime
 
 
 class AmenityTest(unittest.TestCase):
@@ -13,6 +14,10 @@ class AmenityTest(unittest.TestCase):
         """ basic test """
         am = Amenity()
         self.assertEqual(type(am), Amenity)
+        self.assertIsInstance(am.id, str)
+        self.assertIsInstance(am.created_at, datetime.datetime)
+        self.assertIsInstance(am.updated_at, datetime.datetime)
+        self.assertIsInstance(am.name, str)
 
     def test_user_type(self):
         am = Amenity()

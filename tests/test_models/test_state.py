@@ -4,6 +4,7 @@
 
 from models.state import State
 import unittest
+import datetime
 
 
 class StateTest(unittest.TestCase):
@@ -18,6 +19,10 @@ class StateTest(unittest.TestCase):
         """ test attributes """
         st = State()
         self.assertEqual(st.name, "")
+        self.assertIsInstance(st.id, str)
+        self.assertIsInstance(st.created_at, datetime.datetime)
+        self.assertIsInstance(st.updated_at, datetime.datetime)
+        self.assertIsInstance(st.name, str)
 
     def test_with_value(self):
         """

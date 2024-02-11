@@ -4,6 +4,7 @@
 
 from models.review import Review
 import unittest
+import datetime
 
 
 class ReviewTest(unittest.TestCase):
@@ -13,6 +14,10 @@ class ReviewTest(unittest.TestCase):
         """ basic test """
         rv = Review()
         self.assertEqual(type(rv), Review)
+        self.assertIsInstance(rv.id, str)
+        self.assertIsInstance(rv.created_at, datetime.datetime)
+        self.assertIsInstance(rv.updated_at, datetime.datetime)
+        self.assertIsInstance(rv.name, str)
 
     def test_attributes(self):
         """ test attributes """

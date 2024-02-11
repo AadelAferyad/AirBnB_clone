@@ -5,6 +5,7 @@
 from models.city import City
 import unittest
 from models.state import State
+import datetime
 
 
 class CityTest(unittest.TestCase):
@@ -19,6 +20,10 @@ class CityTest(unittest.TestCase):
         cy = City()
         self.assertEqual(cy.state_id, "")
         self.assertEqual(cy.name, "")
+        self.assertIsInstance(cy.id, str)
+        self.assertIsInstance(cy.created_at, datetime.datetime)
+        self.assertIsInstance(cy.updated_at, datetime.datetime)
+        self.assertIsInstance(cy.name, str)
 
     def test_attributes(self):
         """ test attributes """

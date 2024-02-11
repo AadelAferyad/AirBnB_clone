@@ -7,6 +7,7 @@ from models.place import Place
 from models.amenity import Amenity
 from models.city import City
 from models.user import User
+import datetime
 
 
 class PlaceTest(unittest.TestCase):
@@ -16,6 +17,10 @@ class PlaceTest(unittest.TestCase):
         """ basic test """
         pl = Place()
         self.assertEqual(type(pl), Place)
+        self.assertIsInstance(pl.id, str)
+        self.assertIsInstance(pl.created_at, datetime.datetime)
+        self.assertIsInstance(pl.updated_at, datetime.datetime)
+        self.assertIsInstance(pl.name, str)
 
     def test_type(self):
         """ test tyoe """
