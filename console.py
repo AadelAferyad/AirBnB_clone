@@ -19,7 +19,7 @@ import json
 
 class HBNBCommand(cmd.Cmd):
     """
-    class for command interpreter
+class for command interpreter
     """
 
     prompt = "(hbnb) "
@@ -29,26 +29,25 @@ class HBNBCommand(cmd.Cmd):
 
     def do_help(self, arg):
         """
-        help command to get informations about commands (help + command)
+help command to get informations about commands (help + command)
         """
         super().do_help(arg)
 
     def do_EOF(self, line):
         """
-        EOF command to exit the program or (CRTL + D)
+EOF command to exit the program or (CRTL + D)
         """
         return True
 
     def do_quit(self, line):
         """
-        Quit command to exit the program
+Quit command to exit the program
         """
         return True
 
     def emptyline(self):
         """
-        emptyline command to skip (if empty line
-        passed as a command do nothing)
+emptyline command to skip (if empty line passed as a command do nothing)
         """
         pass
 
@@ -107,8 +106,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_create(self, arg):
         """
-        create command to create new
-        object and save it to Json file
+create command to create new object and save it to Json file
         """
         if not arg:
             self.print_werror(1)
@@ -121,7 +119,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_show(self, arg):
         """
-        show command prints the string representation of an instance
+show command prints the string representation of an instance
         """
         args = arg.split()
         if not arg:
@@ -142,7 +140,7 @@ class HBNBCommand(cmd.Cmd):
 
     @staticmethod
     def print_werror(case):
-        """ this functions is for reapeted errors"""
+        """ this functions is for reapeted errors """
         if case == 1:
             print("** class name missing **")
         elif case == 2:
@@ -163,7 +161,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_destroy(self, arg):
         """
-        destroy command Deletes an instance
+destroy command Deletes an instance
         """
         args = arg.split()
         if not arg:
@@ -182,7 +180,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_all(self, arg):
         """
-        all command prints all string representation of all instances
+all command prints all string representation of all instances
         """
         i = 0
         if arg and arg not in HBNBCommand.classes:
@@ -205,7 +203,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_update(self, arg):
         """
-        update command updates an instance and save it to json file
+update command updates an instance and save it to json file
         """
         args = arg.split()
         if not arg:
