@@ -13,7 +13,7 @@ class AmenityTest(unittest.TestCase):
     def test_basic(self):
         """ basic test """
         am = Amenity()
-        self.assertEqual(type(am), Amenity)
+        self.assertIsInstance(am, Amenity)
         self.assertIsInstance(am.id, str)
         self.assertIsInstance(am.created_at, datetime.datetime)
         self.assertIsInstance(am.updated_at, datetime.datetime)

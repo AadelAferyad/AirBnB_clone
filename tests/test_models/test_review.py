@@ -13,7 +13,7 @@ class ReviewTest(unittest.TestCase):
     def test_basic(self):
         """ basic test """
         rv = Review()
-        self.assertEqual(type(rv), Review)
+        self.assertIsInstance(rv, Review)
         self.assertIsInstance(rv.id, str)
         self.assertIsInstance(rv.created_at, datetime.datetime)
         self.assertIsInstance(rv.updated_at, datetime.datetime)

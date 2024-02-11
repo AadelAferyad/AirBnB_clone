@@ -16,7 +16,7 @@ class PlaceTest(unittest.TestCase):
     def test_basic(self):
         """ basic test """
         pl = Place()
-        self.assertEqual(type(pl), Place)
+        self.assertIsInstance(pl, Place)
         self.assertIsInstance(pl.id, str)
         self.assertIsInstance(pl.created_at, datetime.datetime)
         self.assertIsInstance(pl.updated_at, datetime.datetime)

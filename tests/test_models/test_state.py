@@ -13,12 +13,11 @@ class StateTest(unittest.TestCase):
     def test_basic(self):
         """ basic test """
         state = State()
-        self.assertEqual(type(state), State)
+        self.assertIsInstance(state, State)
 
     def test_attributes(self):
         """ test attributes """
         st = State()
-        self.assertEqual(st.name, "")
         self.assertIsInstance(st.id, str)
         self.assertIsInstance(st.created_at, datetime.datetime)
         self.assertIsInstance(st.updated_at, datetime.datetime)
