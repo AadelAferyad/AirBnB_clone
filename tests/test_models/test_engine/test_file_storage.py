@@ -12,6 +12,7 @@ from models.place import Place
 from models.review import Review
 from models.user import User
 import unittest
+from models import storage
 import os
 
 
@@ -37,6 +38,10 @@ class TestFileStorage(unittest.TestCase):
         self.assertEqual(instance_1.__dict__["name"], "Aadel")
         self.assertEqual(type(FileStorage._FileStorage__file_path), str)
         self.assertEqual(type(FileStorage._FileStorage__objects), dict)
+        self.assertTrue(hasattr(storage, "all"))
+        self.assertTrue(hasattr(storage, "new"))
+        self.assertTrue(hasattr(storage, "save"))
+        self.assertTrue(hasattr(storage, "reload"))
 
     def test_all_method(self):
         """
