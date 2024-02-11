@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-""" package """
+""" this file is for the main package """
 
 
 from .engine.file_storage import FileStorage
