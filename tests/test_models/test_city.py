@@ -24,6 +24,7 @@ class CityTest(unittest.TestCase):
         self.assertIsInstance(cy.created_at, datetime.datetime)
         self.assertIsInstance(cy.updated_at, datetime.datetime)
         self.assertIsInstance(cy.name, str)
+        self.assertIsInstance(cy.state_id, str)
 
     def test_attributes(self):
         """ test attributes """

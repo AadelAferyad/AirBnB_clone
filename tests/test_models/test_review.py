@@ -21,6 +21,13 @@ class ReviewTest(unittest.TestCase):
         self.assertIsInstance(rv.user_id, str)
         self.assertIsInstance(rv.text, str)
 
+    def test_type(self):
+        """test type"""
+        rv = Review()
+        self.assertEqual(rv.place_id, "")
+        self.assertEqual(rv.user_id, "")
+        self.assertEqual(rv.text, "")
+
     def test_attributes(self):
         """ test attributes """
         rv = Review()

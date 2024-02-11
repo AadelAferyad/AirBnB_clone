@@ -20,7 +20,17 @@ class PlaceTest(unittest.TestCase):
         self.assertIsInstance(pl.id, str)
         self.assertIsInstance(pl.created_at, datetime.datetime)
         self.assertIsInstance(pl.updated_at, datetime.datetime)
+        self.assertIsInstance(pl.city_id, str)
+        self.assertIsInstance(pl.user_id, str)
         self.assertIsInstance(pl.name, str)
+        self.assertIsInstance(pl.description, str)
+        self.assertIsInstance(pl.number_rooms, int)
+        self.assertIsInstance(pl.number_bathrooms, int)
+        self.assertIsInstance(pl.max_guest, int)
+        self.assertIsInstance(pl.price_by_night, int)
+        self.assertIsInstance(pl.latitude, float)
+        self.assertIsInstance(pl.longitude, float)
+        self.assertIsInstance(pl.amenity_ids, list)
 
     def test_type(self):
         """ test tyoe """

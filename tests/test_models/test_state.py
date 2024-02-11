@@ -24,6 +24,11 @@ class StateTest(unittest.TestCase):
         self.assertIsInstance(st.updated_at, datetime.datetime)
         self.assertIsInstance(st.name, str)
 
+    def test_type(self):
+        """test type"""
+        st = State()
+        self.assertEqual(st.name, "")
+
     def test_with_value(self):
         """
         test assigning value to name
