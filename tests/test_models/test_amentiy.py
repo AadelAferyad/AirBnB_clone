@@ -5,6 +5,7 @@
 from models.amenity import Amenity
 import unittest
 import datetime
+from models.base_model import BaseModel
 
 
 class AmenityTest(unittest.TestCase):
@@ -32,6 +33,11 @@ class AmenityTest(unittest.TestCase):
         am.name = "haruma"
 
         self.assertEqual(am.name, "haruma")
+
+    def test_inheritance(self):
+        """test_inheritance"""
+        self.assertTrue(issubclass(Amenity, BaseModel)
+                        and Amenity is not BaseModel)
 
 
 if __name__ == '__main__':

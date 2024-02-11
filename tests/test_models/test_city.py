@@ -5,6 +5,7 @@
 from models.city import City
 import unittest
 from models.state import State
+from models.base_model import BaseModel
 import datetime
 
 
@@ -38,6 +39,11 @@ class CityTest(unittest.TestCase):
 
         self.assertEqual(cy.name, "dar lkbira")
         self.assertEqual(cy.state_id, st.id)
+
+    def test_inheritance(self):
+        """test_inheritance"""
+        self.assertTrue(issubclass(City, BaseModel)
+                        and City is not BaseModel)
 
 
 if __name__ == '__main__':

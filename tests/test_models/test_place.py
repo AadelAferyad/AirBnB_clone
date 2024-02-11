@@ -7,6 +7,7 @@ from models.place import Place
 from models.amenity import Amenity
 from models.city import City
 from models.user import User
+from models.base_model import BaseModel
 import datetime
 
 
@@ -78,6 +79,11 @@ class PlaceTest(unittest.TestCase):
         self.assertEqual(pl.latitude, 8.2)
         self.assertEqual(pl.longitude, 10.22)
         self.assertEqual(pl.amenity_ids, [am.id])
+
+    def test_inheritance(self):
+        """test_inheritance"""
+        self.assertTrue(issubclass(Place, BaseModel)
+                        and Place is not BaseModel)
 
 
 if __name__ == '__main__':

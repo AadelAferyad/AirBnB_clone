@@ -5,6 +5,7 @@
 from models.review import Review
 import unittest
 import datetime
+from models.base_model import BaseModel
 
 
 class ReviewTest(unittest.TestCase):
@@ -37,6 +38,11 @@ class ReviewTest(unittest.TestCase):
         self.assertEqual(rv.place_id, "dar houda")
         self.assertEqual(rv.user_id, "haruma")
         self.assertEqual(rv.text, "simple text")
+
+    def test_inheritance(self):
+        """test_inheritance"""
+        self.assertTrue(issubclass(Review, BaseModel)
+                        and Review is not BaseModel)
 
 
 if __name__ == '__main__':
