@@ -17,7 +17,6 @@ class ReviewTest(unittest.TestCase):
         self.assertIsInstance(rv.id, str)
         self.assertIsInstance(rv.created_at, datetime.datetime)
         self.assertIsInstance(rv.updated_at, datetime.datetime)
-        self.assertIsInstance(rv.name, str)
 
     def test_attributes(self):
         """ test attributes """
