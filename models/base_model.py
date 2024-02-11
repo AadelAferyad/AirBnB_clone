@@ -18,17 +18,6 @@ class BaseModel:
     def __init__(self, *args, **kwargs):
         """
         Initialize an instance of the class.
-
-        Parameters:
-        - *args: Not used.
-        - **kwargs: Keyword arguments for initializing instance attributes.
-            - If provided:
-                - Set attributes using kwargs, excluding '__class__'.
-                - Convert 'created_at' and 'updated_at' to datetime objects.
-            - If not provided:
-                - Generate a new UUID for 'id'.
-                - Set 'created_at' and 'updated_at' to the current datetime.
-                - Add the instance to the storage.
         """
 
         if len(kwargs) != 0:
