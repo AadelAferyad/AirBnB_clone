@@ -223,7 +223,10 @@ update command updates an instance and save it to json file
                 print("** value missing **")
             else:
                 obj = dic[key].to_dict()
-                obj[args[2]] = json.loads(args[3])
+                obj_key = args[2]
+                if "\"" in obj_key:
+                    obj_key = obj_key.replace("\"", "")
+                obj[obj_key] = json.loads(args[3])
                 instance = eval(HBNBCommand.classes[args[0]]+"(**obj)")
                 storage.new(instance)
                 storage.save()
