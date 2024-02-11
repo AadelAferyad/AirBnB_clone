@@ -40,5 +40,5 @@ class AmenityTest(unittest.TestCase):
                         and Amenity is not BaseModel)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

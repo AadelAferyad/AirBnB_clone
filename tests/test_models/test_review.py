@@ -45,5 +45,5 @@ class ReviewTest(unittest.TestCase):
                         and Review is not BaseModel)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

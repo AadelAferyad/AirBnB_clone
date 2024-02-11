@@ -38,5 +38,5 @@ class TestUser(unittest.TestCase):
         self.assertEqual(user.password, "root")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()
