@@ -20,6 +20,9 @@ class AmenityTest(unittest.TestCase):
         self.assertIsInstance(am.name, str)
 
     def test_user_type(self):
+        """
+        test type
+        """
         am = Amenity()
         self.assertEqual(am.name, "")
 

@@ -17,6 +17,9 @@ class CityTest(unittest.TestCase):
         self.assertEqual(type(cy), City)
 
     def test_user_type(self):
+        """
+        test type
+        """
         cy = City()
         self.assertEqual(cy.state_id, "")
         self.assertEqual(cy.name, "")
