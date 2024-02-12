@@ -44,6 +44,11 @@ class CityTest(unittest.TestCase):
         self.assertTrue(issubclass(City, BaseModel)
                         and City is not BaseModel)
 
+    def test_class(self):
+        """test instance"""
+        instance = City()
+        self.assertIsInstance(instance, City)
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -43,6 +43,11 @@ class ReviewTest(unittest.TestCase):
         self.assertTrue(issubclass(Review, BaseModel)
                         and Review is not BaseModel)
 
+    def test_class(self):
+        """test instance"""
+        instance = Review()
+        self.assertIsInstance(instance, Review)
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -38,6 +38,11 @@ class AmenityTest(unittest.TestCase):
         self.assertTrue(issubclass(Amenity, BaseModel)
                         and Amenity is not BaseModel)
 
+def test_class(self):
+        """test instance"""
+        instance = Amenity()
+        self.assertIsInstance(instance, Amenity)
+
 
 if __name__ == "__main__":
     unittest.main()

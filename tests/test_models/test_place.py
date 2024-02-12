@@ -84,6 +84,11 @@ class PlaceTest(unittest.TestCase):
         self.assertTrue(issubclass(Place, BaseModel)
                         and Place is not BaseModel)
 
+    def test_class(self):
+        """test instance"""
+        instance = Place()
+        self.assertIsInstance(instance, Place)
+
 
 if __name__ == "__main__":
     unittest.main()

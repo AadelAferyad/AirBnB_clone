@@ -41,6 +41,11 @@ class StateTest(unittest.TestCase):
         self.assertTrue(issubclass(State, BaseModel)
                         and State is not BaseModel)
 
+    def test_class(self):
+        """test instance"""
+        instance = State()
+        self.assertIsInstance(instance, State)
+
 
 if __name__ == "__main__":
     unittest.main()
