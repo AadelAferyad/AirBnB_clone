@@ -74,9 +74,7 @@ emptyline command to skip (if empty line passed as a command do nothing)
               ((".destroy(" in line) and (")" in line))) and len(line) > 8:
             regex_id = ""
             full_cmd = ""
-            matchs = re.search(pattern, args[1])
-            if matchs:
-                regex_id = matchs.group()
+            regex_id = self.regex_remov(pattern, args[1])
             full_cmd += args[0] + " " + regex_id
             if ("show" in line):
                 self.do_show(full_cmd)
@@ -86,20 +84,13 @@ emptyline command to skip (if empty line passed as a command do nothing)
             full_pattern = r"(?<=\(|\").+([^\)])"
             full_cmd = ""
             regex_full = ""
-            matchs = re.search(full_pattern, args[1])
-            if matchs:
-                regex_full = matchs.group()
+            regex_full = self.regex_remov(full_pattern, args[1])
             regex_id, regex_att, regex_va = regex_full.split(",")
-            matchs = re.search(pattern, regex_id)
-            if matchs:
-                regex_id = matchs.group()
+            regex_id = self.regex_remov(pattern, regex_id)
             if "\"" in regex_att:
-                matchs = re.search(pattern, regex_att)
-                if matchs:
-                    regex_att = matchs.group()
+                regex_att = self.regex_remov(pattern, regex_att)
             full_cmd += args[0] + " " + regex_id + " " + \
                 regex_att + " " + regex_va
-            print(full_cmd)
             self.do_update(full_cmd)
         else:
             super().default(line)
@@ -158,6 +149,17 @@ show command prints the string representation of an instance
         instance = eval(HBNBCommand.classes[arg] + "(**dic)")
         all_instances = all_instances + str(instance)
         return all_instances
+
+    @staticmethod
+    def regex_remov(pattern, arg):
+        """
+remove anything using regex
+        """
+        new_string = ""
+        matchs = re.search(pattern, arg)
+        if matchs:
+            new_string = matchs.group()
+        return new_string
 
     def do_destroy(self, arg):
         """
