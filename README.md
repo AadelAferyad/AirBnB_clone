@@ -1,1 +1,1 @@
-readme
+web static
