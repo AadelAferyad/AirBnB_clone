@@ -1,1 +1,1 @@
-web static
+console
