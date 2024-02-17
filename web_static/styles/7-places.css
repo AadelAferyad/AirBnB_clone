@@ -1,0 +1,33 @@
+.places{
+    margin: 0;
+    padding: 0;
+}
+.places h1{
+    font-size: 30px;
+    padding: 0;
+    margin: 15px 0 0 15px;
+}
+.places article{
+    width: 390px;
+    padding: 20px;
+    margin: 20px;
+    border: 1px solid #FF5A5F;
+    border-radius: 4px;
+
+}
+.places article h2{
+    font-size: 30px;
+    margin: 0;
+    padding: 0;
+}
+.places .maryama article h2{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.maryama{
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: center;
+}
