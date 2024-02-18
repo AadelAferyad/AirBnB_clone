@@ -1,0 +1,111 @@
+.places{
+    margin: 0;
+    padding: 0;
+}
+.places h1{
+    font-size: 30px;
+    padding: 0;
+    margin: 15px 0 0 15px;
+}
+.places article{
+    width: 390px;
+    padding: 20px;
+    margin: 20px;
+    border: 1px solid #FF5A5F;
+    border-radius: 4px;
+    position: relative;
+
+}
+.places article h2{
+    font-size: 30px;
+    margin: 0;
+    padding: 0;
+}
+.places .maryama article h2{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+.maryama{
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.price_by_night{
+    width: 60px;
+    height: 60px;
+    min-width: 60px;
+    margin: 20px;
+    color: #FF5A5F;
+    font-size: 30px;
+    padding: 10px;
+    border: 4px #FF5A5F solid;
+    border-radius: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+.price_by_night h2{
+    font-weight: 200;
+}
+.information{
+    height: 80px;
+    border-top: 1px solid #DDDDDD;
+    border-bottom: 1px solid #DDDDDD;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    margin-top: 60px;
+}
+.max_guest, .number_rooms, .number_bathrooms{
+    width: 100px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.guest_icon{
+    height: 50px;
+    width: 50px;
+    background-image: url('/images/icon_group.png');
+    background-size: fill;
+    margin: 0;
+    padding: 0;
+}
+.rooms_icon{
+    height: 50px;
+    width: 50px;
+    background-image: url('/images/icon_bed.png');
+    background-size: fill;
+    margin: 0;
+    padding: 0;
+}
+.bathrooms_icon{
+    height: 50px;
+    width: 50px;
+    background-image: url('/images/icon_bath.png');
+    background-size: fill;
+    margin: 0;
+    padding: 0;
+}
+.max_guest h5,
+.number_rooms h5,
+.number_bathrooms h5{
+    margin: 0;
+    padding: 0;
+}
+
+.user h5{
+    font-weight: 200;
+}
+.user h5 span{
+    font-weight: 700;
+}
